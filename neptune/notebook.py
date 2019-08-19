@@ -87,6 +87,31 @@ class Notebook(object):
         with open(file_path) as f:
             return self._client.create_checkpoint(self.id, os.path.abspath(file_path), f)
 
+    def get_checkpoints(self, tag=None):
+        """List all checkpoints matching the specified criteria.
+
+        Args:
+            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
+                | checkpoint tag like ``'exploration'`` or list of tags like
+                  ``['exploration', 'client']``. Only checkpoints tagged with all tags in the list
+                  will be returned.
+
+        Returns:
+            :obj:`list` of :class:`~neptune.checkpoint.Checkpoint` objects.
+
+        Examples:
+
+            .. code:: python3
+
+                # list everything
+                notebook.list_checkpoints()
+
+                # list checkpoints with any of two tags.
+                notebook.list_checkpoints(tag=['visualizations', 'client-update'])
+
+        """
+        pass
+
     def get_path(self):
         """Returns the path used to upload the current checkpoint of this notebook
 
@@ -102,104 +127,3 @@ class Notebook(object):
             :obj:`str`: the name of current checkpoint
         """
         return self._client.get_last_checkpoint(self._project, self._id).name
-
-    def list_tags(self, notebook_name=None, owner=None):
-        """List tags in notebooks.
-
-        Args:
-            notebook_name (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | notebook name like ``'my-notebook'`` or list of notebook names like
-                  ``['my-notebook', 'model-training', 'visualizations']``.
-            owner (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | owner (username) of the notebook like ``'james'`` or list of usernames like
-                  ``[james', 'andrey']``.
-
-        Returns:
-            :obj:`list` of :obj:`str` - list of tags or empty list if no tags.
-        """
-        pass
-
-    def list_checkpoints(self, notebook_name=None, tag=None, owner=None):
-        """List all checkpoints matching the specified criteria.
-
-        All parameters are optional, each of them specifies a single criterion.
-        Only checkpoints matching all of the criteria will be returned.
-
-        If a specific criterion accepts a :obj:`list` (like ``tag``),
-        then matching with any element of the list is sufficient to pass criterion.
-
-        Args:
-            notebook_name (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | notebook name like ``'my-notebook'`` or list of notebook names like
-                  ``['my-notebook', 'model-training', 'visualizations']``.
-            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | checkpoint tag like ``'exploration'`` or list of tags like
-                  ``['exploration', 'client']``.
-            owner (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | owner (username) of the notebook like ``'james'`` or list of usernames like
-                  ``[james', 'andrey']``.
-
-        Returns:
-            :obj:`pandas.DataFrame` with columns `owner`, `notebook name`, `checkpoint`, `checkpoint timestamp`, `tags`.
-
-        Examples:
-
-            .. code:: python3
-
-                # list everything
-                notebook.list_checkpoints()
-
-                # list checkpoints with any of two tags.
-                notebook.list_checkpoints(tag=['visualizations', 'client-update'])
-
-        """
-        pass
-
-    def download_checkpoint(self, destination_dir, notebook_name, checkpoint=None, tag=None, owner=None):
-        """Download single checkpoint (.ipynb files) matching the specified criteria.
-
-        | If multiple checkpoints match specified criteria, then most recent one will be downloaded.
-        | Downloaded `.ipynb` file has name: **<checkpoint>.ipynb**.
-        | If no checkpoint satisfies the criteria, warning is printed to `stdout`.
-
-        Args:
-            destination_dir (:obj:`str`): The directory where the file will be downloaded.
-            notebook_name (:obj:`str`): notebook name like ``'my-notebook'``.
-            checkpoint (:obj:`str`, optional, default is ``None``): checkpoint name like ``'new-visualizations'``.
-            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | checkpoint tag like ``'exploration'`` or list of tags like ``['exploration', 'client-update']``.
-                | If list is passed, checkpoint must have all tags to match with the criterion.
-            owner (:obj:`str`, optional, default is ``None``): owner (username) of the notebook like ``'james'``.
-
-        Examples:
-
-            .. code:: python3
-
-                # download latest checkpoint of 'my-notebook'
-                notebook.download_checkpoint('/home/james/project/', 'my-notebook')
-
-                # download specific checkpoint of 'my-notebook'
-                notebook.download_checkpoint('/home/james/project/', 'my-notebook',
-                                             checkpoint='new-visualizations')
-
-        Note:
-            Neptune allows you to have multiple notebooks and checkpoints with the same name.
-            Keep that in mind when you are selecting criteria.
-        """
-        pass
-
-    def remove_checkpoint(self, notebook_name, checkpoint, tag=None, owner=None):
-        """Removes checkpoint from Neptune.
-
-        | If checkpoint does not exist, method's invoke has no effect.
-        | If multiple checkpoints match specified criteria, then warning is printed to stdout. No checkpoint is removed.
-
-        Args:
-            notebook_name (:obj:`str` ): notebook name like ``'my-notebook'``.
-            checkpoint (:obj:`str`): checkpoint name like ``'new-visualizations'``.
-            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | checkpoint tag like ``'exploration'`` or list of tags like ``['exploration', 'client-update']``.
-                | If list is passed, checkpoint must have all tags to match with the criterion.
-            owner (:obj:`str`, optional, default is ``None``): owner (username) of the notebook like ``'james'``.
-        """
-        pass

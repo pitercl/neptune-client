@@ -17,7 +17,23 @@
 
 class Checkpoint(object):
 
-    def __init__(self, _id, name, path):
+    def __init__(self, _id, _notebook_id, _name, _path):
         self.id = _id
-        self.name = name
-        self.path = path
+        self.notebook_id = _notebook_id
+        self.name = _name
+        self.path = _path
+
+    def download(self, destination_path):
+        """Download this checkpoint (.ipynb files).
+
+        Args:
+            destination_path (:obj:`str`): The path where the file will be downloaded.
+
+        Examples:
+
+            .. code:: python3
+
+                # download latest checkpoint of 'my-notebook'
+                checkpoint.download('/home/james/project/my-downloaded-notebook.ipynb')
+        """
+        pass

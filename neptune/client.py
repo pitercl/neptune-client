@@ -272,7 +272,7 @@ class Client(object):
                 raise NotebookNotFound(notebook_id=notebook_id, project=project.full_id)
 
             checkpoint = api_checkpoint_list.entries[0]
-            return Checkpoint(checkpoint.id, checkpoint.name, checkpoint.path)
+            return Checkpoint(checkpoint.id, checkpoint.notebook_id, checkpoint.name, checkpoint.path)
         except HTTPNotFound:
             raise NotebookNotFound(notebook_id=notebook_id, project=project.full_id)
 

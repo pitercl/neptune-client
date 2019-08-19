@@ -444,6 +444,42 @@ class Project(object):
         """
         return self.client.get_notebook(project=self, notebook_id=notebook_id)
 
+    def get_notebook_checkpoints(self, notebook_id=None, tag=None, owner=None):
+        """List all checkpoints matching the specified criteria.
+
+        All parameters are optional, each of them specifies a single criterion.
+        Only checkpoints matching all of the criteria will be returned.
+
+        Args:
+            notebook_id (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
+                | notebook id like ``'b4e67856-998b-48ac-a328-1ee13568daec'`` or list of notebook ids like
+                  ``['4207f877-7a01-4dcb-a149-5a1ae340c9c5', '1e448d21-4aea-4f1c-a953-7b0647930769']``.
+                  Checkpoint belonging to one of the specified notebooks will match this criterion.
+            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
+                | checkpoint tag like ``'exploration'`` or list of tags like
+                  ``['exploration', 'client']``. Only checkpoints tagged with all specified tags
+                  will match this criterion.
+            owner (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
+                | owner (username) of the notebook like ``'james'`` or list of usernames like
+                  ``[james', 'andrey']``.
+                  Checkpoint created by any of the specified users will match this criterion.
+
+        Returns:
+            :obj:`list` of :class:`~neptune.checkpoint.Checkpoint` objects.
+
+        Examples:
+
+            .. code:: python3
+
+                # list everything
+                project.get_notebook_checkpoints()
+
+                # list checkpoints with any of two tags.
+                project.get_notebook_checkpoints(tag=['visualizations', 'client-update'])
+
+        """
+        pass
+
     @property
     def full_id(self):
         """Project qualified name as :obj:`str`, for example `john/sandbox`.
