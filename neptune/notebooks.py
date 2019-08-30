@@ -94,6 +94,7 @@ class Notebook(object):
 
         Returns:
             :obj:`list` of :class:`~neptune.notebooks.Checkpoint` objects.
+            They are sorted by created date in descending order (latest first).
 
         Examples:
             Assuming that `notebooks` is instance of the :class:`~neptune.notebooks.Notebook`.
