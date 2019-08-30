@@ -24,12 +24,13 @@ class Checkpoint(object):
         self.path = _path
 
     def download(self, destination_path):
-        """Download this checkpoint (.ipynb files).
+        """Download this checkpoint (.ipynb file).
 
         Args:
             destination_path (:obj:`str`): The path where the file will be downloaded.
 
         Examples:
+            Assuming that `checkpoint` is an instance of the :class:`~neptune.checkpoint.Checkpoint`.
 
             .. code:: python3
 
