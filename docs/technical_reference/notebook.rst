@@ -1,6 +1,6 @@
 Notebook
 ========
 
-.. automodule:: neptune.notebook
+.. automodule:: neptune.notebooks
     :members:
     :show-inheritance:
