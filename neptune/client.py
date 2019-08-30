@@ -37,11 +37,10 @@ from neptune.api_exceptions import ExperimentAlreadyFinished, ExperimentLimitRea
     ExperimentNotFound, ExperimentValidationError, NamespaceNotFound, ProjectNotFound, StorageLimitReached, \
     ChannelAlreadyExists, ChannelsValuesSendBatchError, NotebookNotFound, \
     PathInProjectNotFound, ChannelNotFound
-from neptune.checkpoint import Checkpoint
 from neptune.experiments import Experiment
 from neptune.internal.utils.http import extract_response_field
 from neptune.model import ChannelWithLastValue, LeaderboardEntry
-from neptune.notebook import Notebook
+from neptune.notebooks import Checkpoint, Notebook
 from neptune.oauth import NeptuneAuthenticator
 from neptune.utils import is_float, with_api_exceptions_handler
 
