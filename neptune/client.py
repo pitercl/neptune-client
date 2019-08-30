@@ -238,7 +238,7 @@ class Client(object):
                 raise
 
     @with_api_exceptions_handler
-    def get_notebook(self, project, notebook_id):
+    def get_notebook(self, project, notebook_id, owner):
         try:
             api_notebook_list = self.leaderboard_swagger_client.api.listNotebooks(
                 projectIdentifier=project.internal_id,
