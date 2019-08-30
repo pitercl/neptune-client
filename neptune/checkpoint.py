@@ -16,11 +16,19 @@
 
 
 class Checkpoint(object):
+    """It contains all the information about checkpoint
 
-    def __init__(self, _id, _notebook_id, _name, _path):
+        Args:
+            _id (:obj:`str`): checkpoint uuid
+            _notebook_id (:obj:`str`): uuid of the notebook that this checkpoint belong to
+            _name (:obj:`str` or ``None``): checkpoint name
+            _description (:obj:`str` or ``None``): checkpoint description
+    """
+    def __init__(self, _id, _notebook_id, _name, _description, _path):
         self.id = _id
         self.notebook_id = _notebook_id
         self.name = _name
+        self.description = _description
         self.path = _path
 
     def download(self, destination_path):
