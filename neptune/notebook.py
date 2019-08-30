@@ -49,22 +49,21 @@ class Notebook(object):
     def owner(self):
         return self._owner
 
-    def add_checkpoint(self, file_path=None, tag=None, name=None):
-        """Uploads new checkpoint of the notebook to Neptune.
-
-        If called without parameters - add checkpoint to notebook from which it is called.
+    def add_checkpoint(self, file_path=None, name=None, description=None):
+        """Upload new checkpoint to the notebook in Neptune.
 
         Args:
             file_path (:obj:`str`, optional, default is ``None``):
                 | File path containing notebook contents (.ipynb file).
                   If ``None``, assume that method is called from Notebook.
-            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | checkpoint tag like ``'exploration'`` or list of tags like ``['exploration', 'client']``.
             name (:obj:`str`, optional, default is ``None``):
-                | If ``None``, checkpoint will be assigned timestamp name,
+                | If ``None``, checkpoint will be assigned timestamp as name,
                 | If ``str`` is passed, checkpoint will be assigned this name.
+            description (:obj:`str`, optional, default is ``None``):
+                | description of the checkpoint.
 
         Example:
+            Assuming that `notebooks` is instance of the :class:`~neptune.notebook.Notebook`.
 
             .. code:: python3
 
@@ -76,9 +75,6 @@ class Notebook(object):
                 # Upload new checkpoint
                 notebook.add_checkpoint('file.ipynb')
 
-                # Upload new checkpoint (call made from notebook cell)
-                notebook.add_checkpoint()
-
                 # Upload new checkpoint and name it
                 notebook.add_checkpoint('file.ipynb', name='visualizations')
         """
@@ -87,27 +83,29 @@ class Notebook(object):
         with open(file_path) as f:
             return self._client.create_checkpoint(self.id, os.path.abspath(file_path), f)
 
-    def get_checkpoints(self, tag=None):
+    def get_checkpoints(self, checkpoint_id=None):
         """List all checkpoints matching the specified criteria.
 
         Args:
-            tag (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
-                | checkpoint tag like ``'exploration'`` or list of tags like
-                  ``['exploration', 'client']``. Only checkpoints tagged with all tags in the list
-                  will be returned.
+            checkpoint_id (:obj:`str` or :obj:`list` of :obj:`str`, optional, default is ``None``):
+                | checkpoint id like ``'b4e67856-998b-48ac-a328-1ee13568daec'`` or list of checkpoint ids like
+                  ``['4207f877-7a01-4dcb-a149-5a1ae340c9c5', '1e448d21-4aea-4f1c-a953-7b0647930769']``.
+                | If ``None`` - all checkpoints are matching.
 
         Returns:
             :obj:`list` of :class:`~neptune.checkpoint.Checkpoint` objects.
 
         Examples:
+            Assuming that `notebooks` is instance of the :class:`~neptune.notebook.Notebook`.
 
             .. code:: python3
 
-                # list everything
-                notebook.list_checkpoints()
+                # get all checkpoints
+                notebook.get_checkpoints()
 
-                # list checkpoints with any of two tags.
-                notebook.list_checkpoints(tag=['visualizations', 'client-update'])
+                # get checkpoints by providing their ids
+                notebook.get_checkpoints(checkpoint_id=['4207f877-7a01-4dcb-a149-5a1ae340c9c5',
+                                                        '1e448d21-4aea-4f1c-a953-7b0647930769'])
 
         """
         pass
