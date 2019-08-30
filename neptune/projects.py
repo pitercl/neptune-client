@@ -409,10 +409,10 @@ class Project(object):
         )
 
     def create_notebook(self):
-        """Create a new notebook object and return corresponding :class:`~neptune.notebook.Notebook` instance.
+        """Create a new notebook object and return corresponding :class:`~neptune.notebooks.Notebook` instance.
 
         Returns:
-            :class:`~neptune.notebook.Notebook` object.
+            :class:`~neptune.notebooks.Notebook` object.
 
         Examples:
 
@@ -440,7 +440,7 @@ class Project(object):
                 | If ``None`` - all notebooks are matching.
 
         Returns:
-            :obj:`list` of :class:`~neptune.notebook.Notebook` objects.
+            :obj:`list` of :class:`~neptune.notebooks.Notebook` objects.
 
         Examples:
 

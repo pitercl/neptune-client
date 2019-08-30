@@ -63,7 +63,7 @@ class Notebook(object):
                 | description of the checkpoint.
 
         Example:
-            Assuming that `notebooks` is instance of the :class:`~neptune.notebook.Notebook`.
+            Assuming that `notebooks` is instance of the :class:`~neptune.notebooks.Notebook`.
 
             .. code:: python3
 
@@ -93,10 +93,10 @@ class Notebook(object):
                 | If ``None`` - all checkpoints are matching.
 
         Returns:
-            :obj:`list` of :class:`~neptune.checkpoint.Checkpoint` objects.
+            :obj:`list` of :class:`~neptune.notebooks.Checkpoint` objects.
 
         Examples:
-            Assuming that `notebooks` is instance of the :class:`~neptune.notebook.Notebook`.
+            Assuming that `notebooks` is instance of the :class:`~neptune.notebooks.Notebook`.
 
             .. code:: python3
 
@@ -150,7 +150,7 @@ class Checkpoint(object):
             destination_path (:obj:`str`): The path where the file will be downloaded.
 
         Examples:
-            Assuming that `checkpoint` is an instance of the :class:`~neptune.checkpoint.Checkpoint`.
+            Assuming that `checkpoint` is an instance of the :class:`~neptune.notebooks.Checkpoint`.
 
             .. code:: python3
 
