@@ -29,6 +29,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt -r test_requirements.txt
     - name: Lint with pylint
+      if: matrix.os == 'ubuntu-latest'
       run: |
         python -m pylint -j 0 neptune tests
     - name: Test with pytest
