@@ -34,4 +34,4 @@ jobs:
         python -m pylint -j 0 neptune tests
     - name: Test with pytest
       run: |
-        pytest --cov-config tox.ini tests/neptune
+        pytest --cov-config tox.ini --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html tests/neptune
