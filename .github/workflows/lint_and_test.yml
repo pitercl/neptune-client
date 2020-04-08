@@ -34,4 +34,11 @@ jobs:
         python -m pylint -j 0 neptune tests
     - name: Test with pytest
       run: |
-        pytest --cov-config tox.ini --junitxml=junit/test-results.xml --cov=com --cov-report=xml --cov-report=html tests/neptune
+        pytest --cov-config tox.ini --junitxml=junit/test-results-${{ matrix.os }}-${{ matrix.python-version }}.xml --cov=com --cov-report=xml --cov-report=html tests/neptune
+    - name: Upload pytest test results
+      uses: actions/upload-artifact@master
+      with:
+        name: pytest-results-${{ matrix.os }}-${{ matrix.python-version }}
+        path: junit/test-results-${{ matrix.os }}-${{ matrix.python-version }}.xml
+      # Use always() to always run this step to publish test results when there are test failures
+      if: always()
