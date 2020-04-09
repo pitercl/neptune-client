@@ -1,4 +1,4 @@
-name: Lint and test
+name: Unit tests
 
 on:
   push:
@@ -25,9 +25,6 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt -r test_requirements.txt
-    - name: Lint with pylint
-      run: |
-        python -m pylint -j 0 neptune tests
     - name: Test with pytest
       run: |
         pytest --cov-config tox.ini --junitxml=junit/test-results-${{ matrix.os }}-${{ matrix.python-version }}.xml --cov=com --cov-report=xml --cov-report=html tests/neptune
@@ -36,5 +33,4 @@ jobs:
       with:
         name: pytest-results-${{ matrix.os }}-${{ matrix.python-version }}
         path: junit/test-results-${{ matrix.os }}-${{ matrix.python-version }}.xml
-      # Use always() to always run this step to publish test results when there are test failures
       if: always()
