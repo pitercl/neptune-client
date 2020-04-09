@@ -29,5 +29,3 @@ class AssertionExtensions(object):
     def assert_float_greater_than(self, x, y):
         self.assertGreater(x, y)
         self.assertEqual(float, type(x))
-
-
