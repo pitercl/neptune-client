@@ -17,7 +17,7 @@ import time
 import unittest
 
 from neptune.internal.hardware.gauges.cpu import CGroupCpuUsageGauge, SystemCpuUsageGauge
-from neptune.utils import IS_WINDOWS
+from tests.neptune.utils.helpers import is_linux
 
 
 class TestCpuGauges(unittest.TestCase):
@@ -33,7 +33,7 @@ class TestCpuGauges(unittest.TestCase):
         self.assertLessEqual(cpu_usage, 100.0)
         self.assertEqual(float, type(cpu_usage))
 
-    @unittest.skipIf(IS_WINDOWS, "Windows doesn't have cgroups")
+    @unittest.skipUnless(is_linux(), "Only linux has cgroups")
     def test_cgroup_cpu_gauge_returns_zero_on_first_measurement(self):
         # given
         gauge = CGroupCpuUsageGauge()
@@ -45,7 +45,7 @@ class TestCpuGauges(unittest.TestCase):
         self.assertEqual(0.0, cpu_usage)
         self.assertEqual(float, type(cpu_usage))
 
-    @unittest.skipIf(IS_WINDOWS, "Windows doesn't have cgroups")
+    @unittest.skipUnless(is_linux(), "Only linux has cgroups")
     def test_cgroup_cpu_gauge_measurement(self):
         # given
         gauge = CGroupCpuUsageGauge()
