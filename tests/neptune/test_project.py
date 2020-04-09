@@ -190,8 +190,8 @@ class TestProject(unittest.TestCase):
 
     # pylint: disable=protected-access
     def test_get_current_experiment_from_stack(self):
-        # given
-        experiment = Munch(internal_id=a_uuid_string())
+        # given (stop is there because shutdown hook calls it)
+        experiment = Munch(internal_id=a_uuid_string(), stop=lambda: None)
 
         # when
         self.project._push_new_experiment(experiment)
@@ -201,9 +201,9 @@ class TestProject(unittest.TestCase):
 
     # pylint: disable=protected-access
     def test_pop_experiment_from_stack(self):
-        # given
-        first_experiment = Munch(internal_id=a_uuid_string())
-        second_experiment = Munch(internal_id=a_uuid_string())
+        # given (stop is there because shutdown hook calls it)
+        first_experiment = Munch(internal_id=a_uuid_string(), stop=lambda: None)
+        second_experiment = Munch(internal_id=a_uuid_string(), stop=lambda: None)
         # and
         self.project._push_new_experiment(first_experiment)
 
