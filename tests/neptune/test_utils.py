@@ -18,7 +18,7 @@ import unittest
 
 import numpy as np
 import pandas as pd
-from pandas.util.testing import assert_frame_equal
+from pandas.testing import assert_frame_equal
 
 from neptune.utils import map_keys, map_values, as_list, align_channels_on_x, get_channel_name_stems, \
     merge_dataframes
